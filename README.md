@@ -20,7 +20,7 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/c948c7af-39cc-4da1-bbc1-907ff5285f65"><br/>
 * Click on “+” and choose “Add Files …” option
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/397eacc0-4ddb-4c61-828c-50d1d3cd9510"><br/>
-* Choose the “shared.framework“ file
+* Choose the “shared.framework“ file<br/>
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/b1bd7956-aeac-45b1-a7b8-2bb62178b1b3"><br/>
 2. Add path to the “shared.framework” in your project
 * Go to “Target“ → “Build settings“ tab
