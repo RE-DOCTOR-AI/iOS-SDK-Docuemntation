@@ -22,14 +22,14 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 * Click on “+” and choose “Add Files …” option
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/397eacc0-4ddb-4c61-828c-50d1d3cd9510"><br/>
 * Choose the “shared.framework“ file<br/>
-<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/b1bd7956-aeac-45b1-a7b8-2bb62178b1b3"><br/>
+<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/51a696b3-f622-476c-a811-6ab1a7a9ad68"><br/>
 2. Add path to the “shared.framework” in your project
 * Go to “Target“ → “Build settings“ tab
 * Scroll to “Search Paths“ and double-click on “Processing field“ in “Framework Search Paths“
-<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/e1c9e56a-d785-44da-a767-93aa956e4308"><br/>
+<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/4a6eeb2e-4590-4a21-861c-1a516cb43884"><br/>
 * Click on “+” sign 
 * Add “$(PROJECT_DIR)“ value into the field
-<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/c3a7357b-baf0-48de-a51b-50da4986ef10"><br/>
+<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/333879ec-36f5-4907-8e1a-45cec927628b"><br/>
 * Press Enter and click on “Framework Search Paths”
 * You should be able to see values for “Debug” and “Release” settings
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/32617b5f-6dc9-40eb-bd47-546bb808e78b"><br/>
