@@ -40,7 +40,7 @@ Easiest way is to see how it's done on the example app here: https://github.com/
 1. Allow application to work with camera
 * Go to “Info“
 * Add a key “Privacy - Camera Usage Description“
-<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/abe906b0-0bbb-4759-904a-076c76e2ed01"><br/>
+<img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/9110bfff-e623-4cd9-a347-713828f4b805"><br/>
 2. To work with the framework in the code you need to import it using ```import shared```: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L10
 ```swift
 import UIKit
