@@ -10,7 +10,8 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 2. Open it in XCode
 3. Send a request to get the SDK file "shared.framework"
 4. Put the "shared.framework" file to the root folder of the app
-5. Run the App
+5. Do step #1 from the instruction below
+6. Run the App
 
 ### Install SDK to a new project
 1. To install the SDK move the shared.framework file into the root folder of your project directory.
@@ -112,7 +113,7 @@ Debug release of SDK writes some outputs to logs so you can see if there are any
 ## Point of Contact for Support
 In case of any questions, please contact timur@re.doctor
 ## Version details
-Current version is 1.0.1 has a basic functionality to measure vitals including: 
+Current version is 1.0.0 (10) has a basic functionality to measure vitals including: 
 
 1. Blood Oxygen
 2. Respiration Rate
@@ -121,5 +122,9 @@ Current version is 1.0.1 has a basic functionality to measure vitals including:
 
 ## Screenshots
 <p float="left">
-TBD
+<img src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/dfa00be5-e4a5-4287-b1dd-3e17b546d5a6" width=15% height=15%>
+<img src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/8eac4e37-43d0-490f-be4d-3596887a23fd" width=15% height=15%>
+<img src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/b0e64698-2850-4f16-95f5-a045fdb48560" width=15% height=15%>    
+<img src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/d33b27b8-fb64-4e61-9c97-4a3063271e91" width=15% height=15%>
 </p>
+
