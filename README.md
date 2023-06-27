@@ -10,7 +10,7 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 2. Open it in XCode
 3. Send a request to get the SDK file "shared.framework"
 4. Put the "shared.framework" file to the root folder of the app
-5. Do step #1 from the instruction below
+5. Do steps #1 and #2 from the instruction below
 6. Run the App
 
 ### Install SDK to a new project
