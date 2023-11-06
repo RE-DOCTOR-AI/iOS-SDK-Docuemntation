@@ -3,32 +3,46 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1736A0372999539500F139AB /* models in Resources */ = {isa = PBXBuildFile; fileRef = 1736A0362999539500F139AB /* models */; };
+		1AC9C75C1C3333808AB4B9DA /* libPods-Vitals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97FD20E75DD8DE6BA7D48629 /* libPods-Vitals.a */; };
 		1B5314AF245E1F8A009985F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5314AE245E1F8A009985F0 /* AppDelegate.swift */; };
 		1B5314B1245E1F8A009985F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5314B0245E1F8A009985F0 /* SceneDelegate.swift */; };
-		1B5314B3245E1F8A009985F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5314B2245E1F8A009985F0 /* ViewController.swift */; };
 		1B5314B6245E1F8A009985F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B4245E1F8A009985F0 /* Main.storyboard */; };
 		1B5314B8245E1F8B009985F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B7245E1F8B009985F0 /* Assets.xcassets */; };
 		1B5314BB245E1F8B009985F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B9245E1F8B009985F0 /* LaunchScreen.storyboard */; };
+		45EE4E792A9CF5DA007362AD /* IosDeviceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */; };
+		4B7D66A3290FB39300C8D366 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7D66A2290FB39300C8D366 /* KeychainSwiftDistrib.swift */; };
+		4B7D6D8129BF8C9A0077BA02 /* libPods-Vitals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1736A02B299902C200F139AB /* libPods-Vitals.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		4B7D6D8229BF8CAE0077BA02 /* PLMLibTorchWrapper in Frameworks */ = {isa = PBXBuildFile; fileRef = 1736A029299902C200F139AB /* PLMLibTorchWrapper */; };
+		FA87F4072AB227860018A7CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5314B2245E1F8A009985F0 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4B368ECE291A4174001A0531 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+/* Begin PBXContainerItemProxy section */
+		1736A028299902C200F139AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 80E7E71C199267B3172A2503BFF9D72B;
+			remoteInfo = PLMLibTorchWrapper;
 		};
-/* End PBXCopyFilesBuildPhase section */
+		1736A02A299902C200F139AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 492CAFCC0A4514DB870C848457AC807E;
+			remoteInfo = "Pods-Vitals";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1736A021299902C200F139AB /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		1736A02C2999072800F139AB /* shared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = shared.framework; sourceTree = "<group>"; };
+		1736A0352999096800F139AB /* shared.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = shared.framework.dSYM; sourceTree = "<group>"; };
+		1736A0362999539500F139AB /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
 		1B5314AB245E1F8A009985F0 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5314AE245E1F8A009985F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B5314B0245E1F8A009985F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +51,12 @@
 		1B5314B7245E1F8B009985F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B5314BA245E1F8B009985F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B5314BC245E1F8B009985F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosDeviceProvider.swift; sourceTree = "<group>"; };
+		4B7D66A2290FB39300C8D366 /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
+		4B7D6D7D29BF8ACE0077BA02 /* shared */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = shared; path = shared.framework/shared; sourceTree = "<group>"; };
+		4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.debug.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.debug.xcconfig"; sourceTree = "<group>"; };
+		97FD20E75DD8DE6BA7D48629 /* libPods-Vitals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vitals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.release.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,18 +64,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B7D6D8229BF8CAE0077BA02 /* PLMLibTorchWrapper in Frameworks */,
+				4B7D6D8129BF8C9A0077BA02 /* libPods-Vitals.a in Frameworks */,
+				1AC9C75C1C3333808AB4B9DA /* libPods-Vitals.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1736A022299902C200F139AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1736A029299902C200F139AB /* PLMLibTorchWrapper */,
+				1736A02B299902C200F139AB /* libPods-Vitals.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1B5314A2245E1F8A009985F0 = {
 			isa = PBXGroup;
 			children = (
+				4B7D6D7D29BF8ACE0077BA02 /* shared */,
+				1736A0362999539500F139AB /* models */,
 				1B5314AD245E1F8A009985F0 /* Vitals */,
 				1B5314AC245E1F8A009985F0 /* Products */,
 				4B368EC3291A3CFF001A0531 /* Frameworks */,
+				3945C6A05BBF859439C1328A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,17 +108,32 @@
 				1B5314AE245E1F8A009985F0 /* AppDelegate.swift */,
 				1B5314B0245E1F8A009985F0 /* SceneDelegate.swift */,
 				1B5314B2245E1F8A009985F0 /* ViewController.swift */,
+				4B7D66A2290FB39300C8D366 /* KeychainSwiftDistrib.swift */,
 				1B5314B4245E1F8A009985F0 /* Main.storyboard */,
 				1B5314B7245E1F8B009985F0 /* Assets.xcassets */,
 				1B5314B9245E1F8B009985F0 /* LaunchScreen.storyboard */,
 				1B5314BC245E1F8B009985F0 /* Info.plist */,
+				45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */,
 			);
 			path = Vitals;
+			sourceTree = "<group>";
+		};
+		3945C6A05BBF859439C1328A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */,
+				EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		4B368EC3291A3CFF001A0531 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1736A0352999096800F139AB /* shared.framework.dSYM */,
+				1736A02C2999072800F139AB /* shared.framework */,
+				1736A021299902C200F139AB /* Pods.xcodeproj */,
+				97FD20E75DD8DE6BA7D48629 /* libPods-Vitals.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -95,11 +145,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B5314BF245E1F8B009985F0 /* Build configuration list for PBXNativeTarget "Vitals" */;
 			buildPhases = (
+				C68E4419192647788F9E95EC /* [CP] Check Pods Manifest.lock */,
+				454F942A2ACCA10000B7FEFE /* ShellScript */,
 				4BD644B528A630E100CFF11D /* ShellScript */,
 				1B5314A7245E1F8A009985F0 /* Sources */,
 				1B5314A8245E1F8A009985F0 /* Frameworks */,
 				1B5314A9245E1F8A009985F0 /* Resources */,
-				4B368ECE291A4174001A0531 /* Embed Frameworks */,
+				4B7D6D8429BF91E90077BA02 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -135,10 +187,14 @@
 				Base,
 			);
 			mainGroup = 1B5314A2245E1F8A009985F0;
-			packageReferences = (
-			);
 			productRefGroup = 1B5314AC245E1F8A009985F0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1736A022299902C200F139AB /* Products */;
+					ProjectRef = 1736A021299902C200F139AB /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1B5314AA245E1F8A009985F0 /* Vitals */,
@@ -146,11 +202,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		1736A029299902C200F139AB /* PLMLibTorchWrapper */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = PLMLibTorchWrapper;
+			path = libPLMLibTorchWrapper.a;
+			remoteRef = 1736A028299902C200F139AB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1736A02B299902C200F139AB /* libPods-Vitals.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libPods-Vitals.a";
+			remoteRef = 1736A02A299902C200F139AB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		1B5314A9245E1F8A009985F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1736A0372999539500F139AB /* models in Resources */,
 				1B5314BB245E1F8B009985F0 /* LaunchScreen.storyboard in Resources */,
 				1B5314B8245E1F8B009985F0 /* Assets.xcassets in Resources */,
 				1B5314B6245E1F8A009985F0 /* Main.storyboard in Resources */,
@@ -160,6 +235,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		454F942A2ACCA10000B7FEFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Paths to the config files\nDEBUG_CONFIG=\"${SRCROOT}/Pods/Target Support Files/Pods-Vitals/Pods-Vitals.debug.xcconfig\"\nRELEASE_CONFIG=\"${SRCROOT}/Pods/Target Support Files/Pods-Vitals/Pods-Vitals.release.xcconfig\"\n\n# Use sed to find and replace the flag\nif [ -f \"$DEBUG_CONFIG\" ]; then\n    sed -i '' 's/-ObjC//g' \"$DEBUG_CONFIG\"\nfi\n\nif [ -f \"$RELEASE_CONFIG\" ]; then\n    sed -i '' 's/-ObjC//g' \"$RELEASE_CONFIG\"\nfi\n";
+		};
+		4B7D6D8429BF91E90077BA02 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then \n    rm -fr Frameworks\nfi\n";
+		};
 		4BD644B528A630E100CFF11D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -177,6 +287,28 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
+		C68E4419192647788F9E95EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Vitals-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -184,9 +316,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B5314B3245E1F8A009985F0 /* ViewController.swift in Sources */,
+				FA87F4072AB227860018A7CE /* ViewController.swift in Sources */,
 				1B5314AF245E1F8A009985F0 /* AppDelegate.swift in Sources */,
+				45EE4E792A9CF5DA007362AD /* IosDeviceProvider.swift in Sources */,
 				1B5314B1245E1F8A009985F0 /* SceneDelegate.swift in Sources */,
+				4B7D66A3290FB39300C8D366 /* KeychainSwiftDistrib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -249,6 +384,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -263,11 +399,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-framework",
 					shared,
 				);
@@ -281,6 +418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -311,9 +449,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -322,10 +461,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
+					"$(inherited)",
 					"-framework",
 					shared,
 				);
@@ -338,25 +479,45 @@
 		};
 		1B5314C0245E1F8B009985F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = F832GZ48Z7;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_NO_COMMON_BLOCKS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/LibTorch-Lite\"",
+					"\"${PODS_ROOT}/Headers/Public/PLMLibTorchWrapper\"",
+					"$(inherited)",
+					"\"$(PODS_ROOT)/LibTorch-Lite/install/include/\"",
+					"\"${PODS_ROOT}/LibTorch-Lite/install/include/\"",
+					"$(SRCROOT)/Pods",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vitals/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = sdk;
+				INFOPLIST_KEY_CFBundleDisplayName = Glucose;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
+				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"-framework",
-					shared,
+					"$(PROJECT_DIR)/shared.framework",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.Vitals;
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.VitalsV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -369,24 +530,45 @@
 		};
 		1B5314C1245E1F8B009985F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = F832GZ48Z7;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_NO_COMMON_BLOCKS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/LibTorch-Lite\"",
+					"\"${PODS_ROOT}/Headers/Public/PLMLibTorchWrapper\"",
+					"$(inherited)",
+					"\"$(PODS_ROOT)/LibTorch-Lite/install/include/\"",
+					"\"${PODS_ROOT}/LibTorch-Lite/install/include/\"",
+					"$(SRCROOT)/Pods",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vitals/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = sdk;
+				INFOPLIST_KEY_CFBundleDisplayName = Glucose;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
+				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"-framework",
-					shared,
+					"$(PROJECT_DIR)/shared.framework",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.Vitals;
+				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.VitalsV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
