@@ -8,6 +8,8 @@
 	<string>Vitals</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,17 +19,23 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.4.0</string>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>19</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>Minimum System Version</key>
+	<string>13.0.0</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access required for the application</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Access required for the application</string>
+	<key>TVSApiGateway</key>
+	<string>https://s8e46pziyh.execute-api.eu-central-1.amazonaws.com/prod</string>
+	<key>TVSApiKey</key>
+	<string>l1EV3f5YfY8CU71xq81jz6enudAIFD5F9CkEUERm</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -48,7 +56,7 @@
 		</dict>
 	</dict>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>LaunchScreen.storyboard</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
