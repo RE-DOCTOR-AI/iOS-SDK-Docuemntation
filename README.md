@@ -12,22 +12,22 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 4. Put the SDK files file to the root folder of the app
 5. Run the App
 
-### Install SDK to a new project
-1. To install the SDK move the SDK files into the root folder of your project directory.
-* Open your project in XCode
-* Go to “Targets“ → “General“ tab
-
 #### Work with SDK in code
 Easiest way is to see how it's done on the example app here: [https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift](https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/v1.4.0/Vitals/ViewController.swift)
 1. Allow application to work with camera
 * Go to “Info“
 * Add a key “Privacy - Camera Usage Description“
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/9110bfff-e623-4cd9-a347-713828f4b805"><br/>
-2. To work with the framework in the code you need to import it using ```import shared```: [https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L10](https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/v1.4.0/Vitals/ViewController.swift#L10C14-L10C14)
+2. Main part of the code is in https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift
+3. The main class to work with camera ```class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate``` is here: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L14
+4. Work with SDK happens in the function ```func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)``` : https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L88
 
 ##### Get results
-On the class above you can see the status ```status == "PROCESS_FINISHED"```. So once this status is reached you can get values from the library.
-You can see it here [https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L115](https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/v1.4.0/Vitals/ViewController.swift#L190)
+On the function ```func captureOutput```  you can see the status ```frameConsumerStatus == "START_CALCULATING"```.
+Vitals and Glucose levels are calculated in differrent functions.
+* Vitals: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L189
+* Glucose levels: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L232
+
                
 #### Keep in mind
 ##### Metric vs Imperial
@@ -40,7 +40,7 @@ Library needs some patient data in a metric system so use kilograms(kg) and cent
 In case you have imperial measurement system in your apps you can convert that data to metric.
 
 ##### Process duration
-Remember that process of measurement lasts for 40 seconds. 
+Remember that process of measurement can lasts up to 60 seconds but normally it should be around 40 seconds. 
 
 ### Troubleshooting
 Debug release of SDK writes some outputs to logs so you can see if there are any issues.
@@ -53,6 +53,7 @@ Current version is 1.4.0(19) has a  functionality to measure several parameters 
 2. Respiration Rate
 3. Heart Rate
 4. Blood Pressure
+5. Blood Glucose levels
 
 ## Screenshots
 <p float="left">
