@@ -22,6 +22,21 @@ Easiest way is to see how it's done on the example app here: [https://github.com
 3. The main class to work with camera ```class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate``` is here: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L14
 4. Work with SDK happens in the function ```func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)``` : https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L88
 
+##### User data
+SDK requires some user parameters.
+They are passed to SDK in this file: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/IosDeviceProvider.swift
+
+##### Other required files
+In order application to work correctly it requires some additional files you have to copy to your application also while integration process:
+* Vitals/Services https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/Vitals/services
+* Vitals/AppDelegate https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/AppDelegate.swift
+* Vitals/iosDeviceProvider https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/AppDelegate.swift
+* Vitals/SceneDelegate https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/SceneDelegate.swift 
+* Podfile https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Podfile
+* Pods https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/Pods
+* Amplify https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/amplify
+* Shared https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/shared
+
 ##### Get results
 On the function ```func captureOutput```  you can see the status ```frameConsumerStatus == "START_CALCULATING"```.
 Vitals and Glucose levels are calculated in differrent functions.
@@ -31,7 +46,7 @@ Vitals and Glucose levels are calculated in differrent functions.
                
 #### Keep in mind
 ##### Metric vs Imperial
-Library needs some patient data in a metric system so use kilograms(kg) and centimetres (cm). Here is the list:
+Library needs some user data in a metric system so use kilograms(kg) and centimetres (cm). Here is the list:
 1. Height (cm)
 2. Weight (kg)
 3. Age (years)
