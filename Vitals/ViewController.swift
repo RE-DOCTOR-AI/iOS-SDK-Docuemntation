@@ -11,10 +11,24 @@ import shared
 import Accelerate
 import CoreMedia.CMFormatDescription
 
-class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
+//Extension to hide keyboard if user clicked outside of textfield
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
+class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     @IBOutlet var textView: UITextView!
     @IBOutlet var resultView: UITextView!
+    @IBOutlet var validationView: UITextView!
     @IBOutlet var progress: UIProgressView!
     @IBOutlet var VideoView: UIView!
     @IBOutlet var OverlayView: UIView!
@@ -36,7 +50,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }()
     
     private lazy var glucoseLevelProcessor: GlucoseLevelProcessorIOS = {
-        return GlucoseLevelProcessorIOS(filePath: self.getModelPaths())
+        return GlucoseLevelProcessorIOS()
     }()
     
     required init?(coder decoder: NSCoder) {
@@ -116,112 +130,93 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         vDSP_meamgv(&greenVector, 1, &greenAverage, vDSP_Length(numberOfPixels))
         vDSP_meamgv(&blueVector, 1, &blueAverage, vDSP_Length(numberOfPixels))
         
-        let endTime = Date().timeIntervalSince1970
-        let diff = endTime - startTime
         let measurementCount = VitalsScannerSDK.shared.MEASUREMENT_COUNT
         
-        //add 5 seconds delay to allow camera to focus
-        if diff > 5 {
-            do {
-                var frameConsumerStatus: String
-                
-                let averageFrameRGB: FrameAverageRgbIOS = FrameAverageRgbIOS(
-                    averageRed: Double(redAverage),
-                    averageGreen: Double(greenAverage),
-                    averageBlue: Double(blueAverage)
-                )
-                let frameTimestamp = self.getCurrentTimestampInMillis()
-                frameConsumerStatus = frameConsumer.ingestRGB(averageRGB: averageFrameRGB, timestamp: frameTimestamp).name
+        do {
+            var frameConsumerStatus: String
+            
+            let averageFrameRGB: FrameAverageRgbIOS = FrameAverageRgbIOS(
+                averageRed: Double(redAverage),
+                averageGreen: Double(greenAverage),
+                averageBlue: Double(blueAverage)
+            )
+            let frameTimestamp = self.getCurrentTimestampInMillis()
+            frameConsumerStatus = Singleton.sharedInstance.frameConsumer.ingestRGB(averageRGB: averageFrameRGB, timestamp: frameTimestamp).name
+            
+            if (frameConsumerStatus == "SKIP") {
+                return // Do nothing, frame will not be included in the data set
+            }
+            
+            //start validating each frame
+            if (Singleton.sharedInstance.frameConsumer.getVitalsFramesData().counter % 50 == 0) {
+                let redArray = redVector.map({KotlinFloat.init(float: $0)})
+                let frameValidated = ImageValidationUtilsKt.validateFrameIos(redArray: redArray)
 
-                //start validating each frame
-                if (frameConsumer.getVitalsFramesData().counter % 50 == 0) {
-                    let redArray = redVector.map({KotlinFloat.init(float: $0)})
-                    let frameValidated = ImageValidationUtilsKt.validateFrameIos(redArray: redArray)
-                    if (frameValidated == false) {
-                        frameConsumerStatus = "MEASUREMENT_FAILED"
-                        frameConsumer.resetFramesData()
-                        startTime = Date().timeIntervalSince1970
-                    }
-                }
-                
-                //Here we update the progress bar
-                DispatchQueue.global().async {
-                    DispatchQueue.main.async { () -> Void in
-                        let count = self.frameConsumer.getVitalsFramesData().counter
-                        self.progress.setProgress(Float(count)/Float(measurementCount), animated:false)
-                    }
-                }
-                
-                if (frameConsumerStatus == "IN_PROGRESS") {
-                    //Here we update the process status text
-                    DispatchQueue.global().async {
-                        DispatchQueue.main.async { () -> Void in
-                            self.resultView.text = "Process status: measurement in progress..."
-                        }
-                    }
-                } else if (frameConsumerStatus == "START_CALCULATING") {
-                    DispatchQueue.global().async {
-                        DispatchQueue.main.async { () -> Void in
-                            self.resultView.text = "Process status: Calculating results..."
-                            
-                            //hiding everything on the view
-                            self.VideoView.removeFromSuperview()
-                            self.VideoView.frame.size.width = 0
-                            self.VideoView.frame.size.height = 0
-                            self.resultView.isHidden = true
-                            self.progress.isHidden = true
-                            self.captureSession.stopRunning()
-                        }
-                    }
+                if (frameValidated.error != nil) {
+                    frameConsumerStatus = "VALIDATION_FAILED"
                     
-                    self.calculateVitals()
-                    self.calculateGlucose()
-                } else if (frameConsumerStatus == "MEASUREMENT_FAILED") {
                     DispatchQueue.main.sync {
                         //Here we update the process status text
-                        self.resultView.text = "Process status: Let's try one more time!"
+                        self.validationView.text = "Validation failed: " + frameValidated.error!
                     }
+                    Singleton.sharedInstance.frameConsumer.resetFramesData()
+                }
+            }
+            
+            //Here we update the progress bar
+            DispatchQueue.global().async {
+                DispatchQueue.main.async { () -> Void in
+                    let count = Singleton.sharedInstance.frameConsumer.getVitalsFramesData().counter
+                    self.progress.setProgress(Float(count)/Float(measurementCount), animated: false)
+                }
+            }
+            
+            if (frameConsumerStatus == "IN_PROGRESS") {
+                // TODO: validate intermediate data here
+                // Here we update the process status text
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async { () -> Void in
+                        self.resultView.text = "Process status: measurement in progress..."
+                        self.validationView.text = ""
+                    }
+                }
+            } else if (frameConsumerStatus == "START_CALCULATING") {
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async { () -> Void in
+                        self.resultView.text = "Process status: Calculating results..."
+                        self.validationView.text = ""
+                        
+                        //creating alert dialog and hiding everything on the view
+                        self.VideoView.removeFromSuperview()
+                        self.VideoView.frame.size.width = 0
+                        self.VideoView.frame.size.height = 0
+                        self.resultView.isHidden = true
+                        self.progress.isHidden = true
+                        self.captureSession.stopRunning()
+                    }
+                }
+                
+                self.calculateVitals()
+                self.calculateGlucose()
+            } else if (frameConsumerStatus == "MEASUREMENT_FAILED") {
+                DispatchQueue.main.sync {
+                    //Here we update the process status text
+                    self.resultView.text = "Process status: Let's try one more time!"
                 }
             }
         }
     }
     
     func calculateVitals() -> Void {
-        var vitalSignProcessorStatus = vitalSignProcessor.process(framesData: frameConsumer.getVitalsFramesData()).name
-        
-        let ResultedO2 : String = "O2="+self.vitalSignProcessor.getSPo2Value()+"\n"
-        let ResultedBeats : String = "Beats="+String((Int(self.vitalSignProcessor.getBeatsValue()) ?? 0))+"\n"
-        let ResultedBreath : String = "Breath="+self.vitalSignProcessor.getBreathValue()+"\n"
-        let ResultedDP : String = "DP="+self.vitalSignProcessor.getDPValue()+"\n"
-        let ResultedSP : String = "SP="+self.vitalSignProcessor.getSPValue()+"\n"
-        let ResultedRiskLevel: String = "RiskLevel="+self.vitalSignProcessor.getRiskLevelValue()+"\n"
-        let ResultedPulsePressure: String = "PulsePressure="+self.vitalSignProcessor.getPulsePressureValue()+"\n"
-        let ResultedStress: String = "Stress="+self.vitalSignProcessor.getStressValue()+"\n"
-        let ResultedReflectionIndex: String = "ReflectionIndex="+self.vitalSignProcessor.getReflectionIndexValue()+"\n"
-        let ResultedLasi: String = "Lasi="+self.vitalSignProcessor.getLasiValue()+"\n"
-        let ResultedHrv: String = "Hrv="+self.vitalSignProcessor.getHrvValue()+"\n"
-        
-        print(vitalSignProcessorStatus)
-        print(ResultedO2)
-        print(ResultedBeats)
-        print(ResultedBreath)
-        print(ResultedDP)
-        print(ResultedSP)
-        print(ResultedRiskLevel)
-        print(ResultedPulsePressure)
-        print(ResultedStress)
-        print(ResultedReflectionIndex)
-        print(ResultedLasi)
-        print(ResultedHrv)
-        
-        //putting values to Singleton to show them on viewController
+        var vitalSignProcessorStatus = vitalSignProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getVitalsFramesData()).name
+                
+        // Putting values to Singleton to make them accessible from different parts of the app
         Singleton.sharedInstance.SpO2 = self.vitalSignProcessor.getSPo2Value()
         Singleton.sharedInstance.Respiration = self.vitalSignProcessor.getBreathValue()
         Singleton.sharedInstance.HeartRate = (Int(self.vitalSignProcessor.getBeatsValue()) ?? 0) == 0 ? "0" : String((Int(self.vitalSignProcessor.getBeatsValue()) ?? 0))
-        Singleton.sharedInstance.BloodPressure = self.vitalSignProcessor.getSPValue()+"/"+self.vitalSignProcessor.getDPValue()
+        Singleton.sharedInstance.BloodPressure = "\(self.vitalSignProcessor.getSPValue()) / \(self.vitalSignProcessor.getDPValue())"
         Singleton.sharedInstance.SBP = self.vitalSignProcessor.getSPValue()
         Singleton.sharedInstance.DBP = self.vitalSignProcessor.getDPValue()
-        Singleton.sharedInstance.riskLevel = self.vitalSignProcessor.getRiskLevelValue()
         Singleton.sharedInstance.lasi = self.vitalSignProcessor.getLasiValue()
         Singleton.sharedInstance.reflectionIndex = self.vitalSignProcessor.getReflectionIndexValue()
         Singleton.sharedInstance.pulsePressure = self.vitalSignProcessor.getPulsePressureValue()
@@ -233,49 +228,38 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         DispatchQueue.main.sync {
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Results")
-            self.present(nextViewController, animated:true, completion:nil)
-            let text = "processing"
-            var dotCount = 0
-            var isIncreasing = true
-            var timer: Timer?
+            self.present(nextViewController, animated: true, completion: nil)
             (nextViewController  as! ViewControllerResults).Glucose.textAlignment = NSTextAlignment.left
-
-            DispatchQueue.main.async {
-                timer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: true) {_ in
-                    if isIncreasing {
-                        dotCount += 1
-                        if dotCount == 4 {
-                            isIncreasing = false
-                        }
-                    } else {
-                        dotCount -= 1
-                        if dotCount == 0 {
-                            isIncreasing = true
-                        }
-                    }
-                    let dots = String(repeating: ".", count: dotCount)
-                    let animatedText = "\(text)\(dots)"
-                    (nextViewController  as! ViewControllerResults).Glucose.text=animatedText
-                }
-            }
-            timer?.fire()
-            (nextViewController  as! ViewControllerResults).Glucose.textColor=UIColor.systemBlue
+            (nextViewController  as! ViewControllerResults).Glucose.text = "Processing..."
+            (nextViewController  as! ViewControllerResults).Glucose.textColor = UIColor.systemBlue
             
             DispatchQueue.global().async {
-                //start processing
-                var glucoseProcessingStatus = self.glucoseLevelProcessor.process(framesData: self.frameConsumer.getGlucoseFrameData()).name
+                // Start processing
+                var glucoseProcessingStatus = self.glucoseLevelProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getGlucoseFrameData()).name
                 let glucoseMin = self.glucoseLevelProcessor.getGlucoseMinValue()
                 let glucoseMax = self.glucoseLevelProcessor.getGlucoseMaxValue()
+                let glucoseMean = (glucoseMin + glucoseMax) / 2
+                let risk = self.vitalSignProcessor.getRiskLevelValue()
+                var riskLevel = RiskLevel.unknown
+
+                if (risk != nil) {
+                    let riskLevelValue = VitalsRiskLevelIOSKt.getVitalsWithGlucose(vitalsRiskLevel: risk!, glucose: Double(glucoseMean))
+                    riskLevel = VitalsRiskLevelKt.getRiskLevel(riskGrades: riskLevelValue)
+                }
                 
-                Singleton.sharedInstance.glucose = "[\(glucoseMin) - \(glucoseMax)]"
-                Singleton.sharedInstance.glucoseMean = Int32(((glucoseMin)+(glucoseMax))/2)
+                let glucoseResultText = "[\(glucoseMin) - \(glucoseMax)]"
+                Singleton.sharedInstance.glucose = glucoseResultText
+                Singleton.sharedInstance.glucoseMean = glucoseMean
+                Singleton.sharedInstance.riskLevel = riskLevel.name
+                
                 DispatchQueue.main.async {
                     (nextViewController  as! ViewControllerResults).Glucose.textColor=UIColor.label
-                    //showing result
-                    (nextViewController  as! ViewControllerResults).Glucose.text=Singleton.sharedInstance.glucose
-                    (nextViewController  as! ViewControllerResults).StartAgain.isEnabled=true
-                    (nextViewController  as! ViewControllerResults).Glucose.textAlignment=NSTextAlignment.right
-                    timer?.invalidate()
+                    // Showing result
+                    (nextViewController  as! ViewControllerResults).Glucose.text = glucoseResultText
+                    (nextViewController  as! ViewControllerResults).riskLevel.text = riskLevel.name
+                    (nextViewController  as! ViewControllerResults).StartAgain.isEnabled = true
+                    (nextViewController  as! ViewControllerResults).CollectData.isEnabled = true
+                    (nextViewController  as! ViewControllerResults).Glucose.textAlignment = NSTextAlignment.right
                 }
             }
         }
@@ -309,18 +293,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         self.videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "my.image.handling.queue"))
         self.captureSession.addOutput(self.videoOutput)
     }
-    
-    private func getModelPaths() -> KotlinArray<NSString> {
-        let filePath1 = Bundle.main.path(forResource: "models/model_fold0", ofType: "ptl")! as NSString
-        let filePath2 = Bundle.main.path(forResource: "models/model_fold1", ofType: "ptl")! as NSString
-        let filePath3 = Bundle.main.path(forResource: "models/model_fold2", ofType: "ptl")! as NSString
-        let filePath4 = Bundle.main.path(forResource: "models/model_fold3", ofType: "ptl")! as NSString
-        let filePath5 = Bundle.main.path(forResource: "models/model_fold4", ofType: "ptl")! as NSString
-        let filePaths: [NSString] = [filePath1, filePath2, filePath3, filePath4, filePath5]
-        let paths = KotlinArray<NSString>(size: 5, init: { (i: KotlinInt) -> NSString in return filePaths[i.intValue] })
-        return paths
-    }
-    
+
     
     func convert(cmage: CIImage) -> UIImage {
         let context = CIContext(options: nil)
@@ -369,45 +342,8 @@ extension UIImage {
     }
 }
 
-class ViewControllerResults: UIViewController{
-    @IBOutlet var SpO2: UILabel!
-    @IBOutlet var Respiration: UILabel!
-    @IBOutlet var HeartRate: UILabel!
-    @IBOutlet var BloodPressure: UILabel!
-    @IBOutlet var riskLevel: UILabel!
-    @IBOutlet var pulsePressure: UILabel!
-    @IBOutlet var stress: UILabel!
-    @IBOutlet var reflectionIndex: UILabel!
-    @IBOutlet var hrv: UILabel!
-    @IBOutlet var lasi: UILabel!
-    @IBOutlet var Glucose: UILabel!
-    @IBOutlet var StartAgain: UIButton!
-    
-    var existingPatientResponse: [User_] = []
-    var existingPatient: User_?
-    var newPatientResponse: CreatedUser?
-    var newPatient: CreatedUser?
-    let keychain = KeychainSwift()
-    
-    override func viewDidLoad()
-    {
-        SpO2.text = Singleton.sharedInstance.SpO2
-        Respiration.text = Singleton.sharedInstance.Respiration == "0" ? "not enough data" : Singleton.sharedInstance.Respiration
-        HeartRate.text = Singleton.sharedInstance.HeartRate == "0" ? "not enough data" : Singleton.sharedInstance.HeartRate
-        BloodPressure.text = Singleton.sharedInstance.BloodPressure
-        riskLevel.text = Singleton.sharedInstance.riskLevel
-        pulsePressure.text = Singleton.sharedInstance.pulsePressure
-        hrv.text = Singleton.sharedInstance.hrv
-        lasi.text = Singleton.sharedInstance.lasi
-        stress.text = Singleton.sharedInstance.stress
-        reflectionIndex.text = Singleton.sharedInstance.reflectionIndex
-        StartAgain.isEnabled=false
-        super.viewDidLoad()
-    }
-}
 
-
-class ViewControllerStart: UIViewController{
+class ViewControllerStart: UIViewController {
     @IBOutlet var NextButton: UIButton!
     @IBOutlet var Version: UILabel!
     let keychain = KeychainSwift()
@@ -431,32 +367,4 @@ class ViewControllerStart: UIViewController{
         Version.text = version + "(" + boundleVersion + ")"
     }
     
-}
-
-//so tht we can share the data between app views (screens) and view controllers
-class Singleton {
-    var patientHeight : Double = 0.0
-    var patientWeight : Double = 0.0
-    var patientAge : String = "0"
-    var patientGender : Int32 = 0
-    
-    var SpO2: String = "0"
-    var glucose: String = "0"
-    var glucoseMean: Int32 = 0
-    var Respiration: String = "0"
-    var HeartRate: String = "0"
-    var BloodPressure: String = "0"
-    var SBP : String = "0"
-    var DBP : String = "0"
-    var riskLevel : String = "LOW"
-    var pulsePressure: String = "0"
-    var stress: String = "0"
-    var reflectionIndex: String = "0"
-    var hrv: String = "0"
-    var lasi: String = "0"
-    
-    static let sharedInstance = Singleton()
-    private init(){
-        
-    }
 }
