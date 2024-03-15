@@ -6,11 +6,11 @@ PODS:
   - LibTorch-Lite/Torch (1.12.0)
   - PLMLibTorchWrapper (0.5.0):
     - LibTorch-Lite (= 1.12.0)
-  - shared (2.0.0):
+  - shared (1.4.1):
     - PLMLibTorchWrapper (= 0.5.0)
 
 DEPENDENCIES:
-  - shared (from `shared`)
+  - "shared (from `git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git`, tag `1.4.1`)"
 
 SPEC REPOS:
   trunk:
@@ -19,13 +19,19 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   shared:
-    :path: shared
+    :git: "git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git"
+    :tag: 1.4.1
+
+CHECKOUT OPTIONS:
+  shared:
+    :git: "git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git"
+    :tag: 1.4.1
 
 SPEC CHECKSUMS:
   LibTorch-Lite: c2210be0ed41c3a7f972c82715663a44d35ad97c
   PLMLibTorchWrapper: a5e3125e1c96110b38addc4cd4d8102572702928
-  shared: 60ce88e291bb85761e6cff8d861c70cbdf5edb13
+  shared: 42ab92e8cfb476b725d98c6f949e946b39687aa2
 
-PODFILE CHECKSUM: 1b496965186ac6866b196a5abde09fe2f0a3e747
+PODFILE CHECKSUM: 981a45012016bea4f1cce2105725a2c702bfcda4
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.14.3
