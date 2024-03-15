@@ -16,14 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         do {
-            //This is to provide SDK with User data
+            // This is to provide SDK with User parameters
+            // Provide real implementation that reads these values from a store (local cache, backend, etc.)
+            // and exposes them as UserParameters object
             let client = IosProvider()
             
             //SDK Initialization
-            try VitalsScannerSDK.shared.doInitScanner(
-                licenseKey: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lck5hbWUiOiJSZURvY3RvciIsInZhbGlkaXR5RGF0ZSI6IjIwMjUtMTItMzEiLCJhcGlLZXkiOiJuNTcyRjNvZkliOUxsdlYwa2hrYm81RlFuQUZvVmtXaDVNck1CYlhhIiwibGljZW5zZVR5cGUiOiJkZXZlbG9wIn0.GH2-RJKO-PebVtz3aypmqF9mcvPay5Q_jSW_NSAMn0zgMIRwzN7bnnCEaQsJVkwsOt5SbFv48Hk-HyCv0RtSoQ",
-                userParametersProvider: client
-            )
+            try VitalsScannerSDK.shared
+                .withDataCollection() // enable option to send collected signal data along with predicted and real values to the cloud data store.
+                .doInitScanner(
+                    licenseKey: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lck5hbWUiOiJSZURvY3RvciIsInZhbGlkaXR5RGF0ZSI6IjIwMjUtMTItMzEiLCJhcGlLZXkiOiJuNTcyRjNvZkliOUxsdlYwa2hrYm81RlFuQUZvVmtXaDVNck1CYlhhIiwibGljZW5zZVR5cGUiOiJkZXZlbG9wIn0.GH2-RJKO-PebVtz3aypmqF9mcvPay5Q_jSW_NSAMn0zgMIRwzN7bnnCEaQsJVkwsOt5SbFv48Hk-HyCv0RtSoQ",
+                    userParametersProvider: client
+                )
         } catch {
             print("InitScanner failed")
             return false

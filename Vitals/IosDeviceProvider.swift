@@ -1,13 +1,10 @@
-//
-//  IosDeviceProvider.swift
-//  Vitals
-//
-//  Created by Artur Latypov on 8/28/23.
-//  Copyright © 2023 Anurag Ajwani. All rights reserved.
-//
-
 import Foundation
 import shared
+
+/**
+    This is a dummy class implementing UserParametersProvider interface.
+    The class serves as the source of user parameters used for computing vitals and risks
+ */
 
 class IosProvider: UserParametersProvider {    
     func getUserParameters() -> User? {        
