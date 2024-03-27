@@ -43,15 +43,6 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     
     private let videoOutput = AVCaptureVideoDataOutput()
-    private let frameConsumer = DefaultFrameConsumerIOS()
-    
-    private lazy var vitalSignProcessor: VitalSignProcessorIOS = {
-        return VitalSignProcessorIOS()
-    }()
-    
-    private lazy var glucoseLevelProcessor: GlucoseLevelProcessorIOS = {
-        return GlucoseLevelProcessorIOS()
-    }()
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
@@ -208,20 +199,20 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
     func calculateVitals() -> Void {
-        var vitalSignProcessorStatus = vitalSignProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getVitalsFramesData()).name
+        var vitalSignProcessorStatus = Singleton.sharedInstance.vitalSignProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getVitalsFramesData()).name
                 
         // Putting values to Singleton to make them accessible from different parts of the app
-        Singleton.sharedInstance.SpO2 = self.vitalSignProcessor.getSPo2Value()
-        Singleton.sharedInstance.Respiration = self.vitalSignProcessor.getBreathValue()
-        Singleton.sharedInstance.HeartRate = (Int(self.vitalSignProcessor.getBeatsValue()) ?? 0) == 0 ? "0" : String((Int(self.vitalSignProcessor.getBeatsValue()) ?? 0))
-        Singleton.sharedInstance.BloodPressure = "\(self.vitalSignProcessor.getSPValue()) / \(self.vitalSignProcessor.getDPValue())"
-        Singleton.sharedInstance.SBP = self.vitalSignProcessor.getSPValue()
-        Singleton.sharedInstance.DBP = self.vitalSignProcessor.getDPValue()
-        Singleton.sharedInstance.lasi = self.vitalSignProcessor.getLasiValue()
-        Singleton.sharedInstance.reflectionIndex = self.vitalSignProcessor.getReflectionIndexValue()
-        Singleton.sharedInstance.pulsePressure = self.vitalSignProcessor.getPulsePressureValue()
-        Singleton.sharedInstance.stress = self.vitalSignProcessor.getStressValue()
-        Singleton.sharedInstance.hrv = self.vitalSignProcessor.getHrvValue()
+        Singleton.sharedInstance.SpO2 = Singleton.sharedInstance.vitalSignProcessor.getSPo2Value()
+        Singleton.sharedInstance.Respiration = Singleton.sharedInstance.vitalSignProcessor.getBreathValue()
+        Singleton.sharedInstance.HeartRate = (Int(Singleton.sharedInstance.vitalSignProcessor.getBeatsValue()) ?? 0) == 0 ? "0" : String((Int(Singleton.sharedInstance.vitalSignProcessor.getBeatsValue()) ?? 0))
+        Singleton.sharedInstance.BloodPressure = "\(Singleton.sharedInstance.vitalSignProcessor.getSPValue()) / \(Singleton.sharedInstance.vitalSignProcessor.getDPValue())"
+        Singleton.sharedInstance.SBP = Singleton.sharedInstance.vitalSignProcessor.getSPValue()
+        Singleton.sharedInstance.DBP = Singleton.sharedInstance.vitalSignProcessor.getDPValue()
+        Singleton.sharedInstance.lasi = Singleton.sharedInstance.vitalSignProcessor.getLasiValue()
+        Singleton.sharedInstance.reflectionIndex = Singleton.sharedInstance.vitalSignProcessor.getReflectionIndexValue()
+        Singleton.sharedInstance.pulsePressure = Singleton.sharedInstance.vitalSignProcessor.getPulsePressureValue()
+        Singleton.sharedInstance.stress = Singleton.sharedInstance.vitalSignProcessor.getStressValue()
+        Singleton.sharedInstance.hrv = Singleton.sharedInstance.vitalSignProcessor.getHrvValue()
     }
     
     func calculateGlucose() -> Void {
@@ -229,17 +220,15 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Results")
             self.present(nextViewController, animated: true, completion: nil)
-            (nextViewController  as! ViewControllerResults).Glucose.textAlignment = NSTextAlignment.left
-            (nextViewController  as! ViewControllerResults).Glucose.text = "Processing..."
-            (nextViewController  as! ViewControllerResults).Glucose.textColor = UIColor.systemBlue
+            (nextViewController  as! ViewControllerResults).animateProgress()
             
             DispatchQueue.global().async {
                 // Start processing
-                var glucoseProcessingStatus = self.glucoseLevelProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getGlucoseFrameData()).name
-                let glucoseMin = self.glucoseLevelProcessor.getGlucoseMinValue()
-                let glucoseMax = self.glucoseLevelProcessor.getGlucoseMaxValue()
+                var glucoseProcessingStatus = Singleton.sharedInstance.glucoseProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getGlucoseFrameData()).name
+                let glucoseMin = Singleton.sharedInstance.glucoseProcessor.getGlucoseMinValue()
+                let glucoseMax = Singleton.sharedInstance.glucoseProcessor.getGlucoseMaxValue()
                 let glucoseMean = (glucoseMin + glucoseMax) / 2
-                let risk = self.vitalSignProcessor.getRiskLevelValue()
+                let risk = Singleton.sharedInstance.vitalSignProcessor.getRiskLevelValue()
                 var riskLevel = RiskLevel.unknown
 
                 if (risk != nil) {
@@ -253,13 +242,13 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 Singleton.sharedInstance.riskLevel = riskLevel.name
                 
                 DispatchQueue.main.async {
-                    (nextViewController  as! ViewControllerResults).Glucose.textColor=UIColor.label
+                    (nextViewController  as! ViewControllerResults).Glucose.textColor = UIColor.label
                     // Showing result
                     (nextViewController  as! ViewControllerResults).Glucose.text = glucoseResultText
                     (nextViewController  as! ViewControllerResults).riskLevel.text = riskLevel.name
                     (nextViewController  as! ViewControllerResults).StartAgain.isEnabled = true
                     (nextViewController  as! ViewControllerResults).CollectData.isEnabled = true
-                    (nextViewController  as! ViewControllerResults).Glucose.textAlignment = NSTextAlignment.right
+                    (nextViewController  as! ViewControllerResults).stopAnimateProgress()
                 }
             }
         }

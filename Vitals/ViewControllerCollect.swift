@@ -49,7 +49,7 @@ class ViewControllerCollectData: UIViewController {
         let inferredResults = VitalsDto(
             bps: getIntOrMinusOne(from: vitalsSignProcessor.getSPValue()),
             bpd: getIntOrMinusOne(from: vitalsSignProcessor.getDPValue()),
-            pulse: getIntOrMinusOne(from: vitalsSignProcessor.getPulsePressureValue()),
+            pulse: getIntOrMinusOne(from: vitalsSignProcessor.getBeatsValue()),
             respiration: getIntOrMinusOne(from: vitalsSignProcessor.getBreathValue()),
             oxygen: getIntOrMinusOne(from: vitalsSignProcessor.getSPo2Value()),
             glucoseMin: glucoseLevelProcessor?.getGlucoseMinValue() ?? -1,
