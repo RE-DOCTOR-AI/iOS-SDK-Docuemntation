@@ -30,6 +30,7 @@ class ViewControllerResults: UIViewController{
     var newPatient: CreatedUser?
     var glucoseLevelProcessor: GlucoseLevelProcessorIOS?
     let keychain = KeychainSwift()
+    var animationTimer: Timer?
     
     override func viewDidLoad()
     {
@@ -43,7 +44,7 @@ class ViewControllerResults: UIViewController{
         lasi.text = Singleton.sharedInstance.lasi
         stress.text = Singleton.sharedInstance.stress
         reflectionIndex.text = Singleton.sharedInstance.reflectionIndex
-        StartAgain.isEnabled=false
+        StartAgain.isEnabled = false
         CollectData.isEnabled = false
 
         super.viewDidLoad()
@@ -53,5 +54,27 @@ class ViewControllerResults: UIViewController{
         if let nextViewController = segue.destination as? ViewControllerCollectData {
             nextViewController.glucoseLevelProcessor = glucoseLevelProcessor
         }
+    }
+    
+    func animateProgress() {
+        let text = "Processing"
+        var dotCount = 0
+        
+        self.Glucose.textAlignment = NSTextAlignment.left
+        
+        DispatchQueue.main.async {
+            self.animationTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: true) {_ in
+                dotCount += 1
+                let dots = String(repeating: ".", count: dotCount % 4)
+                self.Glucose.text = "\(text)\(dots)"
+            }
+        }
+        self.animationTimer?.fire()
+        self.Glucose.textColor = UIColor.systemBlue
+    }
+    
+    func stopAnimateProgress() {
+        self.Glucose.textAlignment = NSTextAlignment.right
+        self.animationTimer?.invalidate()
     }
 }
