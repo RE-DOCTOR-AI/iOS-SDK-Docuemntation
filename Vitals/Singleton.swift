@@ -12,6 +12,8 @@ import shared
 //so tht we can share the data between app views (screens) and view controllers
 class Singleton {
     let frameConsumer = DefaultFrameConsumerIOS()
+    let vitalSignProcessor = VitalSignProcessorIOS()
+    let glucoseProcessor = GlucoseLevelProcessorIOS()
     
     var patientHeight : Double = 0.0
     var patientWeight : Double = 0.0

@@ -8,8 +8,8 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 ### Work with existing demo app
 1. Download the repo
 2. Open it in XCode
-3. Send a request to get the SDK files
-4. Put the SDK files file to the root folder of the app
+3. Send a request to get authorized link to SDK cocoapod and a license key.
+4. Run `pod install`
 5. Run the App
 
 #### Work with SDK in code
