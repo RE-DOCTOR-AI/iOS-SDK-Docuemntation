@@ -28,32 +28,102 @@ class ViewControllerResults: UIViewController{
     var existingPatientResponse: [User_] = []
     var existingPatient: User_?
     var newPatient: CreatedUser?
-    var glucoseLevelProcessor: GlucoseLevelProcessorIOS?
     let keychain = KeychainSwift()
     var animationTimer: Timer?
     
-    override func viewDidLoad()
-    {
-        SpO2.text = Singleton.sharedInstance.SpO2
-        Respiration.text = Singleton.sharedInstance.Respiration == "0" ? "N/A" : Singleton.sharedInstance.Respiration
-        HeartRate.text = Singleton.sharedInstance.HeartRate == "0" ? "N/A" : Singleton.sharedInstance.HeartRate
-        BloodPressure.text = Singleton.sharedInstance.BloodPressure
-        riskLevel.text = Singleton.sharedInstance.riskLevel
-        pulsePressure.text = Singleton.sharedInstance.pulsePressure
-        hrv.text = Singleton.sharedInstance.hrv
-        lasi.text = Singleton.sharedInstance.lasi
-        stress.text = Singleton.sharedInstance.stress
-        reflectionIndex.text = Singleton.sharedInstance.reflectionIndex
+    override func viewDidLoad() {
         StartAgain.isEnabled = false
         CollectData.isEnabled = false
-
+        
+        if (!Singleton.sharedInstance.dataProcessed) {
+            self.animateProgress()
+            self.calculateVitals()
+            self.calculateGlucose()
+        } else {
+            self.presentVitals()
+            self.presentGlucose()
+        }
         super.viewDidLoad()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextViewController = segue.destination as? ViewControllerCollectData {
-            nextViewController.glucoseLevelProcessor = glucoseLevelProcessor
+    private func calculateVitals() -> Void {
+        DispatchQueue.global().async {
+            let vitalSignProcessor = Singleton.sharedInstance.vitalSignProcessor
+            Singleton.sharedInstance.vitalSignProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getVitalsFramesData())
+            
+            // Putting values to Singleton to show them on viewController
+            Singleton.sharedInstance.SpO2 = vitalSignProcessor.getSPo2Value()
+            Singleton.sharedInstance.Respiration = vitalSignProcessor.getBreathValue()
+            Singleton.sharedInstance.HeartRate = (Int(vitalSignProcessor.getBeatsValue()) ?? 0) == 0 ? "0" : String((Int(vitalSignProcessor.getBeatsValue()) ?? 0))
+            Singleton.sharedInstance.BloodPressure = "\(vitalSignProcessor.getSPValue())/\(vitalSignProcessor.getDPValue())"
+            Singleton.sharedInstance.SBP = vitalSignProcessor.getSPValue()
+            Singleton.sharedInstance.DBP = vitalSignProcessor.getDPValue()
+            Singleton.sharedInstance.lasi = vitalSignProcessor.getLasiValue()
+            Singleton.sharedInstance.reflectionIndex = vitalSignProcessor.getReflectionIndexValue()
+            Singleton.sharedInstance.pulsePressure = vitalSignProcessor.getPulsePressureValue()
+            Singleton.sharedInstance.stress = vitalSignProcessor.getStressValue()
+            Singleton.sharedInstance.hrv = vitalSignProcessor.getHrvValue()
+            
+            DispatchQueue.main.sync {
+                self.presentVitals()
+            }
         }
+    }
+    
+
+    private func calculateGlucose() -> Void {
+        DispatchQueue.global().async {
+            // Start processing
+            let vitalSignProcessor = Singleton.sharedInstance.vitalSignProcessor
+            let glucoseLevelProcessor = Singleton.sharedInstance.glucoseProcessor
+            glucoseLevelProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getGlucoseFrameData())
+            
+            let glucoseMin = glucoseLevelProcessor.getGlucoseMinValue()
+            let glucoseMax = glucoseLevelProcessor.getGlucoseMaxValue()
+            let glucoseMean = (glucoseMin + glucoseMax) / 2
+            let risk = vitalSignProcessor.getRiskLevelValue()
+            var riskLevel = RiskLevel.unknown
+
+            if (risk != nil) {
+                let riskLevelValue = VitalsRiskLevelIOSKt.getVitalsWithGlucose(vitalsRiskLevel: risk!, glucose: Double(glucoseMean))
+                riskLevel = VitalsRiskLevelKt.getRiskLevel(riskGrades: riskLevelValue)
+            }
+            
+            Singleton.sharedInstance.glucose = "[\(glucoseMin) - \(glucoseMax)]"
+            Singleton.sharedInstance.glucoseMean = glucoseMean
+            Singleton.sharedInstance.riskLevel = riskLevel.name
+            Singleton.sharedInstance.dataProcessed = true
+            
+            DispatchQueue.main.sync {
+                self.stopAnimateProgress()
+                self.presentGlucose()
+            }
+        }
+    }
+    
+    private func presentVitals() {
+        // Showing results in main thread
+        self.SpO2.text = Singleton.sharedInstance.SpO2
+        self.Respiration.text = Singleton.sharedInstance.Respiration == "0" ? "N/A" : Singleton.sharedInstance.Respiration
+        self.HeartRate.text = Singleton.sharedInstance.HeartRate == "0" ? "N/A" : Singleton.sharedInstance.HeartRate
+        self.BloodPressure.text = Singleton.sharedInstance.BloodPressure
+        self.riskLevel.text = Singleton.sharedInstance.riskLevel
+        self.pulsePressure.text = Singleton.sharedInstance.pulsePressure
+        self.hrv.text = Singleton.sharedInstance.hrv
+        self.lasi.text = Singleton.sharedInstance.lasi
+        self.stress.text = Singleton.sharedInstance.stress
+        self.reflectionIndex.text = Singleton.sharedInstance.reflectionIndex
+    }
+    
+    
+    private func presentGlucose() {
+        // Showing result in main thread
+        self.Glucose.textColor = UIColor.label
+        self.Glucose.textAlignment = NSTextAlignment.right
+        self.Glucose.text = Singleton.sharedInstance.glucose
+        self.riskLevel.text = Singleton.sharedInstance.riskLevel
+        self.StartAgain.isEnabled = true
+        self.CollectData.isEnabled = true
     }
     
     func animateProgress() {

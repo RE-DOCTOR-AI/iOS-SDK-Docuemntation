@@ -6,11 +6,11 @@ PODS:
   - LibTorch-Lite/Torch (1.12.0)
   - PLMLibTorchWrapper (0.5.0):
     - LibTorch-Lite (= 1.12.0)
-  - shared (1.4.1):
+  - shared (1.4.0):
     - PLMLibTorchWrapper (= 0.5.0)
 
 DEPENDENCIES:
-  - "shared (from `git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git`, tag `1.4.1`)"
+  - shared (from `../transdermal-vitals-scanner/shared`)
 
 SPEC REPOS:
   trunk:
@@ -19,19 +19,13 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   shared:
-    :git: "git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git"
-    :tag: 1.4.1
-
-CHECKOUT OPTIONS:
-  shared:
-    :git: "git@bitbucket.org:mpclient/redoctor-cocoapods-spec.git"
-    :tag: 1.4.1
+    :path: "../transdermal-vitals-scanner/shared"
 
 SPEC CHECKSUMS:
   LibTorch-Lite: c2210be0ed41c3a7f972c82715663a44d35ad97c
   PLMLibTorchWrapper: a5e3125e1c96110b38addc4cd4d8102572702928
-  shared: 42ab92e8cfb476b725d98c6f949e946b39687aa2
+  shared: 0742d2166e6237369f2f5121747caf436fd9df62
 
-PODFILE CHECKSUM: edac960ad12de753681f976e1289183e1983f35d
+PODFILE CHECKSUM: 2f49be4442e5aa8c143f14b3cd24f25ba3cc21cf
 
 COCOAPODS: 1.14.3
