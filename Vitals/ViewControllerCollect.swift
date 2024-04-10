@@ -30,11 +30,7 @@ class ViewControllerCollectData: UIViewController {
             sender.isEnabled = false
         }
     }
-    
-    var glucoseLevelProcessor: GlucoseLevelProcessorIOS?
-    
-    let vitalsSignProcessor = VitalSignProcessorIOS()
-    
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -46,14 +42,17 @@ class ViewControllerCollectData: UIViewController {
 
     private func collectData() -> Bool {
         let rawData = Singleton.sharedInstance.frameConsumer.getGlucoseFrameData()
+        let vitalSignProcessor = Singleton.sharedInstance.vitalSignProcessor
+        let glucoseLevelProcessor = Singleton.sharedInstance.glucoseProcessor
+        
         let inferredResults = VitalsDto(
-            bps: getIntOrMinusOne(from: vitalsSignProcessor.getSPValue()),
-            bpd: getIntOrMinusOne(from: vitalsSignProcessor.getDPValue()),
-            pulse: getIntOrMinusOne(from: vitalsSignProcessor.getBeatsValue()),
-            respiration: getIntOrMinusOne(from: vitalsSignProcessor.getBreathValue()),
-            oxygen: getIntOrMinusOne(from: vitalsSignProcessor.getSPo2Value()),
-            glucoseMin: glucoseLevelProcessor?.getGlucoseMinValue() ?? -1,
-            glucoseMax: glucoseLevelProcessor?.getGlucoseMaxValue() ?? -1
+            bps: getIntOrMinusOne(from: vitalSignProcessor.getSPValue()),
+            bpd: getIntOrMinusOne(from: vitalSignProcessor.getDPValue()),
+            pulse: getIntOrMinusOne(from: vitalSignProcessor.getBeatsValue()),
+            respiration: getIntOrMinusOne(from: vitalSignProcessor.getBreathValue()),
+            oxygen: getIntOrMinusOne(from: vitalSignProcessor.getSPo2Value()),
+            glucoseMin: glucoseLevelProcessor.getGlucoseMinValue(),
+            glucoseMax: glucoseLevelProcessor.getGlucoseMaxValue()
         )
         let realVitals = getRealVitals()
         let user = VitalsScannerSDK.shared.user
