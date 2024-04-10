@@ -51,7 +51,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Singleton.sharedInstance.reset()
         self.addCameraInput()
         self.addPreviewLayer()
         self.addVideoOutput()
@@ -154,13 +154,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                 }
             }
             
-            //Here we update the progress bar
-            DispatchQueue.global().async {
-                DispatchQueue.main.async { () -> Void in
-                    let count = Singleton.sharedInstance.frameConsumer.getVitalsFramesData().counter
-                    self.progress.setProgress(Float(count)/Float(measurementCount), animated: false)
-                }
-            }
+            self.updateProgress()
             
             if (frameConsumerStatus == "IN_PROGRESS") {
                 // TODO: validate intermediate data here
@@ -172,23 +166,8 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
                     }
                 }
             } else if (frameConsumerStatus == "START_CALCULATING") {
-                DispatchQueue.global().async {
-                    DispatchQueue.main.async { () -> Void in
-                        self.resultView.text = "Process status: Calculating results..."
-                        self.validationView.text = ""
-                        
-                        //creating alert dialog and hiding everything on the view
-                        self.VideoView.removeFromSuperview()
-                        self.VideoView.frame.size.width = 0
-                        self.VideoView.frame.size.height = 0
-                        self.resultView.isHidden = true
-                        self.progress.isHidden = true
-                        self.captureSession.stopRunning()
-                    }
-                }
-                
-                self.calculateVitals()
-                self.calculateGlucose()
+                self.endCapture()
+                self.proceedToResults()
             } else if (frameConsumerStatus == "MEASUREMENT_FAILED") {
                 DispatchQueue.main.sync {
                     //Here we update the process status text
@@ -197,62 +176,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             }
         }
     }
-    
-    func calculateVitals() -> Void {
-        var vitalSignProcessorStatus = Singleton.sharedInstance.vitalSignProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getVitalsFramesData()).name
-                
-        // Putting values to Singleton to make them accessible from different parts of the app
-        Singleton.sharedInstance.SpO2 = Singleton.sharedInstance.vitalSignProcessor.getSPo2Value()
-        Singleton.sharedInstance.Respiration = Singleton.sharedInstance.vitalSignProcessor.getBreathValue()
-        Singleton.sharedInstance.HeartRate = (Int(Singleton.sharedInstance.vitalSignProcessor.getBeatsValue()) ?? 0) == 0 ? "0" : String((Int(Singleton.sharedInstance.vitalSignProcessor.getBeatsValue()) ?? 0))
-        Singleton.sharedInstance.BloodPressure = "\(Singleton.sharedInstance.vitalSignProcessor.getSPValue()) / \(Singleton.sharedInstance.vitalSignProcessor.getDPValue())"
-        Singleton.sharedInstance.SBP = Singleton.sharedInstance.vitalSignProcessor.getSPValue()
-        Singleton.sharedInstance.DBP = Singleton.sharedInstance.vitalSignProcessor.getDPValue()
-        Singleton.sharedInstance.lasi = Singleton.sharedInstance.vitalSignProcessor.getLasiValue()
-        Singleton.sharedInstance.reflectionIndex = Singleton.sharedInstance.vitalSignProcessor.getReflectionIndexValue()
-        Singleton.sharedInstance.pulsePressure = Singleton.sharedInstance.vitalSignProcessor.getPulsePressureValue()
-        Singleton.sharedInstance.stress = Singleton.sharedInstance.vitalSignProcessor.getStressValue()
-        Singleton.sharedInstance.hrv = Singleton.sharedInstance.vitalSignProcessor.getHrvValue()
-    }
-    
-    func calculateGlucose() -> Void {
-        DispatchQueue.main.sync {
-            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Results")
-            self.present(nextViewController, animated: true, completion: nil)
-            (nextViewController  as! ViewControllerResults).animateProgress()
-            
-            DispatchQueue.global().async {
-                // Start processing
-                var glucoseProcessingStatus = Singleton.sharedInstance.glucoseProcessor.process(framesData: Singleton.sharedInstance.frameConsumer.getGlucoseFrameData()).name
-                let glucoseMin = Singleton.sharedInstance.glucoseProcessor.getGlucoseMinValue()
-                let glucoseMax = Singleton.sharedInstance.glucoseProcessor.getGlucoseMaxValue()
-                let glucoseMean = (glucoseMin + glucoseMax) / 2
-                let risk = Singleton.sharedInstance.vitalSignProcessor.getRiskLevelValue()
-                var riskLevel = RiskLevel.unknown
 
-                if (risk != nil) {
-                    let riskLevelValue = VitalsRiskLevelIOSKt.getVitalsWithGlucose(vitalsRiskLevel: risk!, glucose: Double(glucoseMean))
-                    riskLevel = VitalsRiskLevelKt.getRiskLevel(riskGrades: riskLevelValue)
-                }
-                
-                let glucoseResultText = "[\(glucoseMin) - \(glucoseMax)]"
-                Singleton.sharedInstance.glucose = glucoseResultText
-                Singleton.sharedInstance.glucoseMean = glucoseMean
-                Singleton.sharedInstance.riskLevel = riskLevel.name
-                
-                DispatchQueue.main.async {
-                    (nextViewController  as! ViewControllerResults).Glucose.textColor = UIColor.label
-                    // Showing result
-                    (nextViewController  as! ViewControllerResults).Glucose.text = glucoseResultText
-                    (nextViewController  as! ViewControllerResults).riskLevel.text = riskLevel.name
-                    (nextViewController  as! ViewControllerResults).StartAgain.isEnabled = true
-                    (nextViewController  as! ViewControllerResults).CollectData.isEnabled = true
-                    (nextViewController  as! ViewControllerResults).stopAnimateProgress()
-                }
-            }
-        }
-    }
     
     func getCurrentTimestampInMillis() -> Int64 {
         return Int64(Date().timeIntervalSince1970 * 1000)
@@ -266,6 +190,42 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
         print("success")
     }
     
+    private func updateProgress() -> Void {
+        //Here we update the progress bar
+        DispatchQueue.global().async {
+            DispatchQueue.main.async { () -> Void in
+                let count = Singleton.sharedInstance.frameConsumer.getVitalsFramesData().counter
+                self.progress.setProgress(Float(count) / Float(VitalsScannerSDK.shared.MEASUREMENT_COUNT), animated: false)
+            }
+        }
+    }
+    
+    private func endCapture() -> Void {
+        DispatchQueue.global().sync {
+            DispatchQueue.main.sync {
+                self.resultView.text = "Process status: Calculating results..."
+                self.validationView.text = ""
+                
+                //creating alert dialog and hiding everything on the view
+                self.VideoView.removeFromSuperview()
+                self.VideoView.frame.size.width = 0
+                self.VideoView.frame.size.height = 0
+                self.resultView.isHidden = true
+                self.progress.isHidden = true
+                self.captureSession.stopRunning()
+            }
+        }
+    }
+    
+    private func proceedToResults() -> Void {
+        DispatchQueue.main.sync {
+            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let nextViewController = storyBoard.instantiateViewController(withIdentifier: "Results") as? ViewControllerResults
+            else { return }
+            nextViewController.modalPresentationStyle = .fullScreen
+            self.present(nextViewController, animated: true, completion: nil)
+        }
+    }
     
     private func addCameraInput() {
         let device = AVCaptureDevice.default(for: .video)!
