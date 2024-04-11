@@ -9,8 +9,10 @@ SDK requires at least 40 seconds of camera and flash to be on to capture video w
 1. Download the repo
 2. Open it in XCode
 3. Send a request to get authorized link to SDK cocoapod and a license key.
-4. In terminal (command line) go to the app folder and run `pod install`
-5. Run the App in XCode
+4. Update link to cocoapod here: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Podfile
+5. Update license key here: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/AppDelegate.swift#L23
+6. In terminal (command line) go to the app folder and run `pod install`
+7. Run the App in XCode
 
 #### Work with SDK in code
 Easiest way is to see how it's done on the example app here: [https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift](https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/v1.4.0/Vitals/ViewController.swift)
