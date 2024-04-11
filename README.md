@@ -38,9 +38,11 @@ In order application to work correctly it requires some additional files you hav
 
 ##### Get results
 On the function ```func captureOutput```  you can see the status ```frameConsumerStatus == "START_CALCULATING"```.
+https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L153
+
 Vitals and Glucose levels are calculated in differrent functions.
-* Vitals: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L189
-* Glucose levels: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L232
+* Vitals: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L362
+* Glucose levels: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L387
 
                
 #### Keep in mind
