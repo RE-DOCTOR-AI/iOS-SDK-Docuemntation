@@ -12,37 +12,32 @@ import shared
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         do {
-            // This is to provide SDK with User parameters
-            // Provide real implementation that reads these values from a store (local cache, backend, etc.)
-            // and exposes them as UserParameters object
             let client = IosProvider()
-            
-            //SDK Initialization
             try VitalsScannerSDK.shared
-                .withDataCollection() // enable option to send collected signal data along with predicted and real values to the cloud data store.
+                .withDataCollection()
+                .withValidation(type: "loose")
                 .doInitScanner(
-                    licenseKey: "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lck5hbWUiOiJSZURvY3RvciIsInZhbGlkaXR5RGF0ZSI6IjIwMjUtMTItMzEiLCJhcGlLZXkiOiJuNTcyRjNvZkliOUxsdlYwa2hrYm81RlFuQUZvVmtXaDVNck1CYlhhIiwibGljZW5zZVR5cGUiOiJkZXZlbG9wIn0.GH2-RJKO-PebVtz3aypmqF9mcvPay5Q_jSW_NSAMn0zgMIRwzN7bnnCEaQsJVkwsOt5SbFv48Hk-HyCv0RtSoQ",
+                    licenseKey: <license key>,
                     userParametersProvider: client
                 )
         } catch {
-            print("InitScanner failed")
+            print("InitScanner failed \(error)")
             return false
         }
-
+        
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
