@@ -33,8 +33,6 @@ In order application to work correctly it requires some additional files you hav
 * Vitals/iosDeviceProvider https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/AppDelegate.swift
 * Vitals/SceneDelegate https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/SceneDelegate.swift 
 * Podfile https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Podfile
-* Amplify https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/amplify
-* Shared https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/tree/main/shared
 
 ##### Get results
 On the function ```func captureOutput```  you can see the status ```frameConsumerStatus == "START_CALCULATING"```.
