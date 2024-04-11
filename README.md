@@ -20,7 +20,7 @@ Easiest way is to see how it's done on the example app here: [https://github.com
 <img width="700" alt="image" src="https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/assets/125552714/9110bfff-e623-4cd9-a347-713828f4b805"><br/>
 2. Main part of the code is in https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift
 3. The main class to work with camera ```class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate``` is here: https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L14
-4. Work with SDK happens in the function ```func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)``` : https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L88
+4. Work with SDK happens in the function ```func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection)``` : https://github.com/RE-DOCTOR-AI/iOS-SDK-Documentation/blob/main/Vitals/ViewController.swift#L78
 
 ##### User data
 SDK requires some user parameters.
