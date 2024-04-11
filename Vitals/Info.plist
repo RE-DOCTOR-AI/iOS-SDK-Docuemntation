@@ -19,15 +19,13 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.0</string>
+	<string>1.5.0</string>
 	<key>CFBundleVersion</key>
-	<string>19</string>
+	<string>21</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>Minimum System Version</key>
-	<string>13.0.0</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access required for the application</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

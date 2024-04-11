@@ -12,41 +12,43 @@
 		1B5314B6245E1F8A009985F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B4245E1F8A009985F0 /* Main.storyboard */; };
 		1B5314B8245E1F8B009985F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B7245E1F8B009985F0 /* Assets.xcassets */; };
 		1B5314BB245E1F8B009985F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B5314B9245E1F8B009985F0 /* LaunchScreen.storyboard */; };
-		45B439C42B9C83140088A1E9 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B439C32B9C83140088A1E9 /* Singleton.swift */; };
-		45B439C62B9C83C00088A1E9 /* ViewControllerResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B439C52B9C83C00088A1E9 /* ViewControllerResults.swift */; };
-		45B439C82B9C84320088A1E9 /* ViewControllerCollect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B439C72B9C84320088A1E9 /* ViewControllerCollect.swift */; };
+		459D39AC2BB927600036F3E3 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D39AB2BB927600036F3E3 /* DBHelper.swift */; };
+		45DAC46E2BB7B7EF00817354 /* ViewControllerStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC46D2BB7B7EF00817354 /* ViewControllerStart.swift */; };
+		45DAC4752BB7B87B00817354 /* ViewControllerPatientParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC4742BB7B87B00817354 /* ViewControllerPatientParameters.swift */; };
+		45DAC4782BB7C36200817354 /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DAC4772BB7C36200817354 /* Patient.swift */; };
 		45EE4E792A9CF5DA007362AD /* IosDeviceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */; };
 		4B7D66A3290FB39300C8D366 /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7D66A2290FB39300C8D366 /* KeychainSwiftDistrib.swift */; };
-		4B7D6D8129BF8C9A0077BA02 /* libPods-Vitals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1736A02B299902C200F139AB /* libPods-Vitals.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		AD01056DC60AC58E8BAA8E88 /* libPods-Vitals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B715132663059836DD2AEFF6 /* libPods-Vitals.a */; };
+		4B7D6D8229BF8CAE0077BA02 /* PLMLibTorchWrapper in Frameworks */ = {isa = PBXBuildFile; fileRef = 1736A029299902C200F139AB /* PLMLibTorchWrapper */; };
+		764F961238918C1BCDB9649D /* libPods-Vitals.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0466B0B5B0BB83B107E61F27 /* libPods-Vitals.a */; };
 		FA87F4072AB227860018A7CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5314B2245E1F8A009985F0 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1736A02A299902C200F139AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 492CAFCC0A4514DB870C848457AC807E;
-			remoteInfo = "Pods-Vitals";
-		};
-		45B439BF2B9C82C80088A1E9 /* PBXContainerItemProxy */ = {
+		1736A028299902C200F139AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 80E7E71C199267B3172A2503BFF9D72B;
 			remoteInfo = PLMLibTorchWrapper;
 		};
-		45B439C12B9C82C80088A1E9 /* PBXContainerItemProxy */ = {
+		458615F92B95FB0100090F3E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = E6FC409E92265F446FE05CFE689B9426;
 			remoteInfo = "shared-shared";
 		};
+		45DAC47F2BB7C36200817354 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1736A021299902C200F139AB /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F5FA45A44C42CC2CA3A324A3E914CE19;
+			remoteInfo = SQLite.swift;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0466B0B5B0BB83B107E61F27 /* libPods-Vitals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vitals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1736A021299902C200F139AB /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		1B5314AB245E1F8A009985F0 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B5314AE245E1F8A009985F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,14 +58,14 @@
 		1B5314B7245E1F8B009985F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B5314BA245E1F8B009985F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B5314BC245E1F8B009985F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45B439C32B9C83140088A1E9 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
-		45B439C52B9C83C00088A1E9 /* ViewControllerResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResults.swift; sourceTree = "<group>"; };
-		45B439C72B9C84320088A1E9 /* ViewControllerCollect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCollect.swift; sourceTree = "<group>"; };
+		459D39AB2BB927600036F3E3 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
+		45DAC46D2BB7B7EF00817354 /* ViewControllerStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerStart.swift; sourceTree = "<group>"; };
+		45DAC4742BB7B87B00817354 /* ViewControllerPatientParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPatientParameters.swift; sourceTree = "<group>"; };
+		45DAC4772BB7C36200817354 /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosDeviceProvider.swift; sourceTree = "<group>"; };
 		4B7D66A2290FB39300C8D366 /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
-		4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.debug.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.debug.xcconfig"; sourceTree = "<group>"; };
-		B715132663059836DD2AEFF6 /* libPods-Vitals.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vitals.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.release.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.release.xcconfig"; sourceTree = "<group>"; };
+		BF46417DD9472D340A2AB19D /* Pods-Vitals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.debug.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.debug.xcconfig"; sourceTree = "<group>"; };
+		FDFADAEC97A7EEE5B5E44810 /* Pods-Vitals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.release.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B7D6D8129BF8C9A0077BA02 /* libPods-Vitals.a in Frameworks */,
-				AD01056DC60AC58E8BAA8E88 /* libPods-Vitals.a in Frameworks */,
+				4B7D6D8229BF8CAE0077BA02 /* PLMLibTorchWrapper in Frameworks */,
+				764F961238918C1BCDB9649D /* libPods-Vitals.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +84,9 @@
 		1736A022299902C200F139AB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				45B439C02B9C82C80088A1E9 /* PLMLibTorchWrapper */,
-				1736A02B299902C200F139AB /* libPods-Vitals.a */,
-				45B439C22B9C82C80088A1E9 /* shared-shared */,
+				1736A029299902C200F139AB /* PLMLibTorchWrapper */,
+				458615FA2B95FB0100090F3E /* shared-shared */,
+				45DAC4802BB7C36200817354 /* SQLite.swift */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,9 +121,10 @@
 				1B5314B9245E1F8B009985F0 /* LaunchScreen.storyboard */,
 				1B5314BC245E1F8B009985F0 /* Info.plist */,
 				45EE4E782A9CF5DA007362AD /* IosDeviceProvider.swift */,
-				45B439C32B9C83140088A1E9 /* Singleton.swift */,
-				45B439C52B9C83C00088A1E9 /* ViewControllerResults.swift */,
-				45B439C72B9C84320088A1E9 /* ViewControllerCollect.swift */,
+				45DAC46D2BB7B7EF00817354 /* ViewControllerStart.swift */,
+				45DAC4742BB7B87B00817354 /* ViewControllerPatientParameters.swift */,
+				45DAC4772BB7C36200817354 /* Patient.swift */,
+				459D39AB2BB927600036F3E3 /* DBHelper.swift */,
 			);
 			path = Vitals;
 			sourceTree = "<group>";
@@ -129,8 +132,8 @@
 		3945C6A05BBF859439C1328A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */,
-				EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */,
+				BF46417DD9472D340A2AB19D /* Pods-Vitals.debug.xcconfig */,
+				FDFADAEC97A7EEE5B5E44810 /* Pods-Vitals.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -139,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				1736A021299902C200F139AB /* Pods.xcodeproj */,
-				B715132663059836DD2AEFF6 /* libPods-Vitals.a */,
+				0466B0B5B0BB83B107E61F27 /* libPods-Vitals.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,14 +154,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B5314BF245E1F8B009985F0 /* Build configuration list for PBXNativeTarget "Vitals" */;
 			buildPhases = (
-				C68E4419192647788F9E95EC /* [CP] Check Pods Manifest.lock */,
+				3599F685DBC0E4960141DE3D /* [CP] Check Pods Manifest.lock */,
 				454F942A2ACCA10000B7FEFE /* ShellScript */,
 				4BD644B528A630E100CFF11D /* ShellScript */,
 				1B5314A7245E1F8A009985F0 /* Sources */,
 				1B5314A8245E1F8A009985F0 /* Frameworks */,
 				1B5314A9245E1F8A009985F0 /* Resources */,
 				4B7D6D8429BF91E90077BA02 /* ShellScript */,
-				2852B72DF03AFFBC6CD72F08 /* [CP] Copy Pods Resources */,
+				36B22140A6B690BBD19EABD4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,7 +180,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Anurag Ajwani";
 				TargetAttributes = {
 					1B5314AA245E1F8A009985F0 = {
@@ -210,27 +213,28 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1736A02B299902C200F139AB /* libPods-Vitals.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libPods-Vitals.a";
-			remoteRef = 1736A02A299902C200F139AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B439C02B9C82C80088A1E9 /* PLMLibTorchWrapper */ = {
+		1736A029299902C200F139AB /* PLMLibTorchWrapper */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			name = PLMLibTorchWrapper;
 			path = libPLMLibTorchWrapper.a;
-			remoteRef = 45B439BF2B9C82C80088A1E9 /* PBXContainerItemProxy */;
+			remoteRef = 1736A028299902C200F139AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45B439C22B9C82C80088A1E9 /* shared-shared */ = {
+		458615FA2B95FB0100090F3E /* shared-shared */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			name = "shared-shared";
 			path = shared.bundle;
-			remoteRef = 45B439C12B9C82C80088A1E9 /* PBXContainerItemProxy */;
+			remoteRef = 458615F92B95FB0100090F3E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DAC4802BB7C36200817354 /* SQLite.swift */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = SQLite.swift;
+			path = libSQLite.swift.a;
+			remoteRef = 45DAC47F2BB7C36200817354 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -249,7 +253,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2852B72DF03AFFBC6CD72F08 /* [CP] Copy Pods Resources */ = {
+		3599F685DBC0E4960141DE3D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Vitals-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		36B22140A6B690BBD19EABD4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,28 +344,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
-		C68E4419192647788F9E95EC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Vitals-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -348,13 +352,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA87F4072AB227860018A7CE /* ViewController.swift in Sources */,
-				45B439C42B9C83140088A1E9 /* Singleton.swift in Sources */,
 				1B5314AF245E1F8A009985F0 /* AppDelegate.swift in Sources */,
-				45B439C82B9C84320088A1E9 /* ViewControllerCollect.swift in Sources */,
-				45B439C62B9C83C00088A1E9 /* ViewControllerResults.swift in Sources */,
 				45EE4E792A9CF5DA007362AD /* IosDeviceProvider.swift in Sources */,
 				1B5314B1245E1F8A009985F0 /* SceneDelegate.swift in Sources */,
+				459D39AC2BB927600036F3E3 /* DBHelper.swift in Sources */,
+				45DAC4752BB7B87B00817354 /* ViewControllerPatientParameters.swift in Sources */,
+				45DAC4782BB7C36200817354 /* Patient.swift in Sources */,
 				4B7D66A3290FB39300C8D366 /* KeychainSwiftDistrib.swift in Sources */,
+				45DAC46E2BB7B7EF00817354 /* ViewControllerStart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +423,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -487,7 +491,6 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -515,14 +518,15 @@
 		};
 		1B5314C0245E1F8B009985F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F07E04A0087269408083DD7 /* Pods-Vitals.debug.xcconfig */;
+			baseConfigurationReference = BF46417DD9472D340A2AB19D /* Pods-Vitals.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 21;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
-				DEVELOPMENT_TEAM = 7XK4Q3GTLK;
+				DEVELOPMENT_TEAM = F832GZ48Z7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(inherited)",
@@ -540,7 +544,7 @@
 					"$(SRCROOT)/Pods",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vitals/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Glucose;
+				INFOPLIST_KEY_CFBundleDisplayName = Vitals;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -551,14 +555,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shared.framework",
 				);
+				MARKETING_VERSION = 1.5.0;
 				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.demo.Vitals;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.Vitals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -566,14 +572,15 @@
 		};
 		1B5314C1245E1F8B009985F0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEE61BC84AD58F4A121AD3EC /* Pods-Vitals.release.xcconfig */;
+			baseConfigurationReference = FDFADAEC97A7EEE5B5E44810 /* Pods-Vitals.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 21;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
-				DEVELOPMENT_TEAM = 7XK4Q3GTLK;
+				DEVELOPMENT_TEAM = F832GZ48Z7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SRCROOT)",
 					"$(inherited)",
@@ -591,7 +598,7 @@
 					"$(SRCROOT)/Pods",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Vitals/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = Glucose;
+				INFOPLIST_KEY_CFBundleDisplayName = Vitals;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,14 +609,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shared.framework",
 				);
+				MARKETING_VERSION = 1.5.0;
 				OTHER_CODE_SIGN_FLAGS = "--generate-entitlement-der";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.demo.Vitals;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvs.Vitals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
