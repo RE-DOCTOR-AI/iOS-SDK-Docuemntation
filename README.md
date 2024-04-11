@@ -62,7 +62,7 @@ Debug release of SDK writes some outputs to logs so you can see if there are any
 ## Point of Contact for Support
 In case of any questions, please contact timur@re.doctor
 ## Version details
-Current version is 1.4.0(19) has a  functionality to measure several parameters including: 
+Current version is 1.5.0(21) has a  functionality to measure several parameters including: 
 
 1. Blood Oxygen
 2. Respiration Rate
